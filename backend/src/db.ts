@@ -26,14 +26,14 @@ const link = new mongoose.Schema({
 })
 
 
-const userModel = mongoose.model('User',userSchema);
-const tagModel = mongoose.model('Tag',tagSchema);
-const contentModel = mongoose.model('Content',contentSchema);
-const linkModel= mongoose.model('Link',link)
+export const userModel = mongoose.model('User',userSchema);
+export const tagModel = mongoose.model('Tag',tagSchema);
+export const contentModel = mongoose.model('Content',contentSchema);
+export const linkModel= mongoose.model('Link',link)
 
-module.exports={
-    userModel:userModel,
-    tagModel:tagModel,
-    contentModel:contentModel,
-    linkModel:linkModel
-}
+// module.exports={
+//     userModel:userModel,
+//     tagModel:tagModel,
+//     contentModel:contentModel,
+//     linkModel:linkModel
+// }
