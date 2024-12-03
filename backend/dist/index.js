@@ -16,6 +16,7 @@ const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const zod_1 = require("zod");
 const db_1 = require("./db");
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 mongoose_1.default.connect('mongodb+srv://ashim:ashim12345@taskmanagerproject.zdfcogy.mongodb.net/brainly');
@@ -37,12 +38,12 @@ app.post('/api/v1/signup', (req, res) => __awaiter(void 0, void 0, void 0, funct
     }
     const { userName, password } = req.body;
     const isUserAlreadyExists = yield db_1.userModel.findOne({ userName: userName });
-    console.log(isUserAlreadyExists);
     if (!isUserAlreadyExists) {
+        const hashedPassword = bcrypt_1.default.hash(password, 5);
         try {
             yield db_1.userModel.create({
                 userName: userName,
-                password: password
+                password: hashedPassword
             });
             res.status(200).json({
                 "message": "signed up sucessfully"
