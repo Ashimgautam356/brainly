@@ -6,11 +6,8 @@ import jwt from 'jsonwebtoken'
 
 export const signin = async(req:Request,res:Response)=>{
     const userLoginSchema = z.object({
-        userName:z.string().email({message:"should be in a email format"}),
-        password:z.string().min(8,{message:"minimum length should be 8"}).max(20).regex(new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$'), {
-            message:
-            'Password must be at least 8 characters and contain an uppercase letter, lowercase letter, and number'
-        })
+        userName:z.string().email(),
+        password:z.string()
     })
 
     const isSchemaValid = userLoginSchema.safeParse(req.body);
@@ -43,7 +40,7 @@ export const signin = async(req:Request,res:Response)=>{
     }
 
     const token  = jwt.sign({
-        id: user._id
+        userId: user._id
     },"this is secrete")
 
     res.status(200).json({

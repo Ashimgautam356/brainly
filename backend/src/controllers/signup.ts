@@ -27,7 +27,7 @@ export const signup = async(req:Request,res:Response)=>{
 
     const isUserAlreadyExists =  await userModel.findOne({userName:userName})
     if(!isUserAlreadyExists){
-        const hashedPassword = bcrypt.hash(password,5);
+        const hashedPassword = String(await bcrypt.hash(password,5));
         try{
             await userModel.create({
                 userName:userName,
@@ -39,7 +39,8 @@ export const signup = async(req:Request,res:Response)=>{
              })
         }catch(e){
              res.status(500).json({
-                 "message":"server error"
+                 "message":"server error",
+                 "error":e
              })
         }
     }
