@@ -20,24 +20,43 @@ const app = (0, express_1.default)();
 app.use(express_1.default.json());
 mongoose_1.default.connect('mongodb+srv://ashim:ashim12345@taskmanagerproject.zdfcogy.mongodb.net/brainly');
 app.post('/api/v1/signup', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { userName, password } = req.body;
     const UserSchema = zod_1.z.object({
-        userName: zod_1.z.string(),
-        password: zod_1.z.string().min(4, "minimum length should be 4")
+        userName: zod_1.z.string().email({ message: "should be in a email format" }),
+        password: zod_1.z.string().min(8, { message: "minimum length should be 8" }).max(20).regex(new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$'), {
+            message: 'Password must be at least 8 characters and contain an uppercase letter, lowercase letter, and number'
+        })
     });
-    UserSchema.safeParse({ userName: userName, password: password });
-    try {
-        db_1.userModel.insertMany({
-            userName: userName,
-            password: password
+    const isValidInput = UserSchema.safeParse(req.body);
+    if (!isValidInput.success) {
+        const validationError = isValidInput.error.formErrors;
+        res.status(411).json({
+            "userName": validationError.fieldErrors.userName,
+            "passwrod": validationError.fieldErrors.password
         });
-        res.json({
-            "suss": "sucess"
-        });
+        return;
     }
-    catch (e) {
-        res.json({
-            err: "error"
+    const { userName, password } = req.body;
+    const isUserAlreadyExists = yield db_1.userModel.findOne({ userName: userName });
+    console.log(isUserAlreadyExists);
+    if (!isUserAlreadyExists) {
+        try {
+            yield db_1.userModel.create({
+                userName: userName,
+                password: password
+            });
+            res.status(200).json({
+                "message": "signed up sucessfully"
+            });
+        }
+        catch (e) {
+            res.status(500).json({
+                "message": "server error"
+            });
+        }
+    }
+    else {
+        res.status(403).json({
+            "message": "user already exists with the userName"
         });
     }
 }));
