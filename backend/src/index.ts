@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose';
 import {signup} from './controllers/signup'
 import { signin } from './controllers/signin';
+import { userAuth } from './middleware/userAuth';
 
 const app = express(); 
 
@@ -13,6 +14,7 @@ mongoose.connect('mongodb+srv://ashim:ashim12345@taskmanagerproject.zdfcogy.mong
 app.post('/api/v1/signup',signup)
 
 
+app.post('/api/v1/signinn',userAuth)
 app.post('/api/v1/signin',signin)
 
 app.get('api/v1/content',async(req,res)=>{

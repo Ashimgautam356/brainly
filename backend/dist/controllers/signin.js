@@ -19,10 +19,8 @@ const db_1 = require("../db");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userLoginSchema = zod_1.z.object({
-        userName: zod_1.z.string().email({ message: "should be in a email format" }),
-        password: zod_1.z.string().min(8, { message: "minimum length should be 8" }).max(20).regex(new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$'), {
-            message: 'Password must be at least 8 characters and contain an uppercase letter, lowercase letter, and number'
-        })
+        userName: zod_1.z.string().email(),
+        password: zod_1.z.string()
     });
     const isSchemaValid = userLoginSchema.safeParse(req.body);
     if (!isSchemaValid.success) {
@@ -49,7 +47,7 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return;
     }
     const token = jsonwebtoken_1.default.sign({
-        userId: user._id
+        id: String(user._id)
     }, "this is secrete");
     res.status(200).json({
         "token": token

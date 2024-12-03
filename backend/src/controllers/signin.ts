@@ -40,7 +40,7 @@ export const signin = async(req:Request,res:Response)=>{
     }
 
     const token  = jwt.sign({
-        userId: user._id
+        id: String(user._id)
     },"this is secrete")
 
     res.status(200).json({

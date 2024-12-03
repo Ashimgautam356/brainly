@@ -1,11 +1,9 @@
 import { Request,Response,NextFunction } from "express"
-import { z} from 'zod'
-import bcrypt from 'bcrypt'
 import { userModel } from "../db"
-import jwt from 'jsonwebtoken'
+import jwt,{JwtPayload} from 'jsonwebtoken'
 
 export const userAuth = async(req:Request,res:Response,next:NextFunction)=>{
-    const userToken = req.headers.token;
+    const userToken = req.headers.token ;
 
     if(!userToken){
         res.status(404).json({
@@ -21,8 +19,15 @@ export const userAuth = async(req:Request,res:Response,next:NextFunction)=>{
         })
         return;
     }
-    const userId = jwt.decode(String(userToken))?.id
-    const user = await userModel.findById(userId)
+
+interface Obj extends JwtPayload{
+    id:string,
+    iat:number
+}
+
+    const abc  = jwt.decode(String(userToken)) as Obj | null
+    console.log(typeof(abc), abc)
+    const user = await userModel.findById({_id:abc?.id})
     req.body.user = user;
     next()
 

@@ -16,10 +16,12 @@ const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const signup_1 = require("./controllers/signup");
 const signin_1 = require("./controllers/signin");
+const userAuth_1 = require("./middleware/userAuth");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 mongoose_1.default.connect('mongodb+srv://ashim:ashim12345@taskmanagerproject.zdfcogy.mongodb.net/brainly');
 app.post('/api/v1/signup', signup_1.signup);
+app.post('/api/v1/signinn', userAuth_1.userAuth);
 app.post('/api/v1/signin', signin_1.signin);
 app.get('api/v1/content', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
