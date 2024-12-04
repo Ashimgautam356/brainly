@@ -1,5 +1,5 @@
 import { Request,Response} from "express"
-import { z} from 'zod'
+import { infer, z} from 'zod'
 import bcrypt from 'bcrypt'
 import { userModel } from "../db"
 import jwt from 'jsonwebtoken'
@@ -9,6 +9,7 @@ export const signin = async(req:Request,res:Response)=>{
         userName:z.string().email(),
         password:z.string()
     })
+    // type userType = z.infer<typeof userLoginSchema>
 
     const isSchemaValid = userLoginSchema.safeParse(req.body);
     if(!isSchemaValid.success){

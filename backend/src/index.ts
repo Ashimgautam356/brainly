@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import {signup} from './controllers/signup'
 import { signin } from './controllers/signin';
 import { userAuth } from './middleware/userAuth';
+import { contentRouter } from './routes/content';
 
 const app = express(); 
 
@@ -14,9 +15,11 @@ mongoose.connect('mongodb+srv://ashim:ashim12345@taskmanagerproject.zdfcogy.mong
 app.post('/api/v1/signup',signup)
 
 
-app.post('/api/v1/signinn',userAuth)
 app.post('/api/v1/signin',signin)
 
+app.use(userAuth)
+
+app.use('/api/v1/content',contentRouter)
 app.get('api/v1/content',async(req,res)=>{
 
 })
