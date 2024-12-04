@@ -22,6 +22,7 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         userName: zod_1.z.string().email(),
         password: zod_1.z.string()
     });
+    // type userType = z.infer<typeof userLoginSchema>
     const isSchemaValid = userLoginSchema.safeParse(req.body);
     if (!isSchemaValid.success) {
         const validationError = isSchemaValid.error.formErrors;

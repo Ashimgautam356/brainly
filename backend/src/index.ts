@@ -20,9 +20,7 @@ app.post('/api/v1/signin',signin)
 app.use(userAuth)
 
 app.use('/api/v1/content',contentRouter)
-app.get('api/v1/content',async(req,res)=>{
 
-})
 app.delete('api/v1/content',async(req,res)=>{
 
 })

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.linkModel = exports.contentModel = exports.tagModel = exports.userModel = void 0;
+exports.linkModel = exports.contentModel = exports.tagModel = exports.userModel = exports.contentTypes = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const mongoose_2 = require("mongoose");
 const userSchema = new mongoose_1.default.Schema({
@@ -13,12 +13,12 @@ const userSchema = new mongoose_1.default.Schema({
 const tagSchema = new mongoose_1.default.Schema({
     tags: { type: String, require: true, unique: true }
 });
-const contentTypes = ['image', 'video', 'article', 'audio'];
+exports.contentTypes = ['image', 'video', 'article', 'audio'];
 const contentSchema = new mongoose_1.default.Schema({
     link: { type: String, require: true },
-    type: { type: String, enum: contentTypes, require: true },
+    type: { type: String, enum: exports.contentTypes, require: true },
     title: { type: String, require: true },
-    tags: { type: mongoose_2.Types.ObjectId, ref: 'Tag' },
+    tags: { type: [String] },
     userId: { type: mongoose_2.Types.ObjectId, ref: 'User', require: true }
 });
 const link = new mongoose_1.default.Schema({

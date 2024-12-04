@@ -26,9 +26,7 @@ interface Obj extends JwtPayload{
 }
 
     const abc  = jwt.decode(String(userToken)) as Obj | null
-    console.log(typeof(abc), abc)
-    const user = await userModel.findById({_id:abc?.id})
-    req.body.user = user;
+    req.body.id = abc?.id;
     next()
 
 }

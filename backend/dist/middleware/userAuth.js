@@ -13,7 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userAuth = void 0;
-const db_1 = require("../db");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const userAuth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const userToken = req.headers.token;
@@ -31,9 +30,7 @@ const userAuth = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
         return;
     }
     const abc = jsonwebtoken_1.default.decode(String(userToken));
-    console.log(typeof (abc), abc);
-    const user = yield db_1.userModel.findById({ _id: abc === null || abc === void 0 ? void 0 : abc.id });
-    req.body.user = user;
+    req.body.id = abc === null || abc === void 0 ? void 0 : abc.id;
     next();
 });
 exports.userAuth = userAuth;
