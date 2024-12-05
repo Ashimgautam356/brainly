@@ -75,7 +75,7 @@ const getBrain = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             });
             return;
         }
-        const content = yield db_1.contentModel.findOne({
+        const content = yield db_1.contentModel.find({
             userId: link.userId
         });
         if (!content) {
