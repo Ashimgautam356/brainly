@@ -5,9 +5,12 @@ import {z} from 'zod'
 // fetching all the content from the database
 export const getContent = async(req:Request,res:Response)=>{
     try{
-        const allContent = await contentModel.find()
+        const allContent = await contentModel.find({
+            userId:req.body.id
+        }).populate("userId","userName")
+
         res.status(200).json({
-            "data":allContent
+            "data": allContent
         })
         return;
     }catch(err){
@@ -69,4 +72,25 @@ export const postContent = async (req:Request,res:Response)=>{
         })
     }
 
+}
+
+
+// deleteContent 
+export const deleteContent  = async (req:Request,res:Response)=>{
+    const contentId = req.body.contentId;
+    
+    try{
+        const deltedContent = await contentModel.deleteOne({
+            _id:contentId,
+            userId:req.body.id
+        })
+        res.status(200).json({
+            "message":"content has been deleted",
+            "deletedContent": deltedContent
+        })
+    }catch(err){
+        res.status(500).json({
+            "message":err
+        })
+    }
 }

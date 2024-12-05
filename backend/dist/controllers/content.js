@@ -9,13 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postContent = exports.getContent = void 0;
+exports.deleteContent = exports.postContent = exports.getContent = void 0;
 const db_1 = require("../db");
 const zod_1 = require("zod");
 // fetching all the content from the database
 const getContent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const allContent = yield db_1.contentModel.find();
+        const allContent = yield db_1.contentModel.find({
+            userId: req.body.id
+        }).populate("userId", "userName");
         res.status(200).json({
             "data": allContent
         });
@@ -76,3 +78,23 @@ const postContent = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.postContent = postContent;
+// deleteContent 
+const deleteContent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const contentId = req.body.contentId;
+    try {
+        const deltedContent = yield db_1.contentModel.deleteOne({
+            _id: contentId,
+            userId: req.body.id
+        });
+        res.status(200).json({
+            "message": "content has been deleted",
+            "deletedContent": deltedContent
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            "message": err
+        });
+    }
+});
+exports.deleteContent = deleteContent;

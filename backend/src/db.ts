@@ -20,7 +20,8 @@ const contentSchema = new mongoose.Schema({
     type:{type:String, enum:contentTypes, require:true},
     title:{type:String, require:true},
     tags: {type:[String]},
-    userId:{type:Types.ObjectId, ref:'User', require:true}
+    userId:{type:Types.ObjectId, ref:'User', require:true},
+
 })
 
 const link = new mongoose.Schema({
