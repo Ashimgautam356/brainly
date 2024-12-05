@@ -9,4 +9,4 @@ exports.contentRouter.get('/allContent', content_1.getContent);
 // adding 
 exports.contentRouter.post('/postContent', content_1.postContent);
 // deleting
-exports.contentRouter.delete('/:delete', content_1.deleteContent);
+exports.contentRouter.delete('/delete', content_1.deleteContent);

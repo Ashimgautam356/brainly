@@ -1,5 +1,4 @@
 import { Request,Response,NextFunction } from "express"
-import { userModel } from "../db"
 import jwt,{JwtPayload} from 'jsonwebtoken'
 
 export const userAuth = async(req:Request,res:Response,next:NextFunction)=>{
@@ -20,12 +19,8 @@ export const userAuth = async(req:Request,res:Response,next:NextFunction)=>{
         return;
     }
 
-interface Obj extends JwtPayload{
-    id:string,
-    iat:number
-}
 
-    const abc  = jwt.decode(String(userToken)) as Obj | null
+    const abc  = jwt.decode(String(userToken)) as JwtPayload
     req.body.id = abc?.id;
     next()
 

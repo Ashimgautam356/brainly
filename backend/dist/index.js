@@ -25,13 +25,9 @@ app.post('/api/v1/signup', signup_1.signup);
 app.post('/api/v1/signin', signin_1.signin);
 app.use(userAuth_1.userAuth);
 app.use('/api/v1/content', content_1.contentRouter);
-app.delete('api/v1/content', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-}));
 app.post('api/v1/brain/share', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 app.get('api/v1/brain/:shareLink', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-}));
-app.post('api/v1/signup', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 app.listen(3001, () => {
     console.log("server is up!!!!!");
