@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -18,6 +9,7 @@ const signup_1 = require("./controllers/signup");
 const signin_1 = require("./controllers/signin");
 const userAuth_1 = require("./middleware/userAuth");
 const content_1 = require("./routes/content");
+const brain_1 = require("./routes/brain");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 mongoose_1.default.connect('mongodb+srv://ashim:ashim12345@taskmanagerproject.zdfcogy.mongodb.net/brainly');
@@ -25,10 +17,7 @@ app.post('/api/v1/signup', signup_1.signup);
 app.post('/api/v1/signin', signin_1.signin);
 app.use(userAuth_1.userAuth);
 app.use('/api/v1/content', content_1.contentRouter);
-app.post('api/v1/brain/share', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-}));
-app.get('api/v1/brain/:shareLink', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-}));
+app.use('/api/v1/brain', brain_1.brainRouter);
 app.listen(3001, () => {
     console.log("server is up!!!!!");
 });

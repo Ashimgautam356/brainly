@@ -26,7 +26,7 @@ const contentSchema = new mongoose.Schema({
 
 const link = new mongoose.Schema({
     hash: { type: String, required: true },
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true ,unique:true},
 })
 
 

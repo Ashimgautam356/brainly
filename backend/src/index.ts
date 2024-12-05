@@ -4,6 +4,7 @@ import {signup} from './controllers/signup'
 import { signin } from './controllers/signin';
 import { userAuth } from './middleware/userAuth';
 import { contentRouter } from './routes/content';
+import { brainRouter } from './routes/brain';
 
 const app = express(); 
 
@@ -21,13 +22,8 @@ app.use(userAuth)
 
 app.use('/api/v1/content',contentRouter)
 
+app.use('/api/v1/brain',brainRouter)
 
-app.post('api/v1/brain/share',async(req,res)=>{
-
-})
-app.get('api/v1/brain/:shareLink',async(req,res)=>{
-
-})
 
 
 

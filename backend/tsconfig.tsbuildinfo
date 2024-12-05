@@ -1,1 +1,1 @@
-{"root":["./src/db.ts","./src/index.ts","./src/controllers/content.ts","./src/controllers/signin.ts","./src/controllers/signup.ts","./src/middleware/userauth.ts","./src/routes/content.ts"],"version":"5.7.2"}
+{"root":["./src/db.ts","./src/index.ts","./src/utils.ts","./src/controllers/brain.ts","./src/controllers/content.ts","./src/controllers/signin.ts","./src/controllers/signup.ts","./src/middleware/userauth.ts","./src/routes/brain.ts","./src/routes/content.ts"],"version":"5.7.2"}
