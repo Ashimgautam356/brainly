@@ -1,7 +1,7 @@
 import React from 'react'
 import { CrossIcon } from '../icons/CrossIcon'
 import { Button } from './Button'
-
+import { Input } from './Input'
 export const CreateContentModal = ({open,onClose}:{open:boolean,onClose:()=>void}) => {
   return (
     <div >
@@ -30,11 +30,3 @@ export const CreateContentModal = ({open,onClose}:{open:boolean,onClose:()=>void
   )
 }
 
-const Input = ({onChange,placeholder}:{onChange: ()=> void,placeholder:string})=>{
-    return(<div>
-
-        <input type="text" placeholder={placeholder} onChange={onChange} className='px-4 py-2 border rounded m-2' />
-
-    </div>
-    )
-}
