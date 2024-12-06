@@ -5,6 +5,7 @@ interface ButtonProps{
   text: string,
   startIcon?:ReactElement,
   size:"sm"|"md"|"lg"
+  onClick?:()=>void
 }
 
 const variantsStyle={
@@ -18,9 +19,9 @@ const sizeStyle={
 }
 const defalutStyle = "flex justify-center items-center rounded-md"
 
-export const Button = ({variants,text,startIcon,size}:ButtonProps) => {
+export const Button = ({variants,text,startIcon,size,onClick}:ButtonProps) => {
   return (
-    <button className={`${defalutStyle} ${variantsStyle[variants]} ${sizeStyle[size]} `}>
+    <button className={`${defalutStyle} ${variantsStyle[variants]} ${sizeStyle[size]} `} onClick={onClick}>
         {startIcon?<div className="pr-2">{startIcon}</div>:null}
         {text}
     </button>

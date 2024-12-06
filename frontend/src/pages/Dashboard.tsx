@@ -1,16 +1,20 @@
-
 import{ Button} from "../components/Button"
 import { PlusIcon } from "../icons/PlusIcon"
 import { ShareIcon } from "../icons/ShareIcon"
 import { Card } from "../components/Card"
+import {SideBar} from '../components/SideBar'
+import { CreateContentModal } from "../components/CreateContentModal"
+import { useState } from "react"
+
 
 export const DashBoard = () => {
+    const [modalOpen ,setModalOpen] = useState(false)
   return (
     <>
     {/* sideBar */}
-    <div className="border  w-72 h-screen fixed ">
+    <div>
+        <SideBar></SideBar>
 
-    hello
     </div>
 
 
@@ -26,7 +30,7 @@ export const DashBoard = () => {
                     <Button variants="secondary" size="md" text="Share" startIcon={<ShareIcon  size="md"/>}></Button >
 
                 </div>
-            <Button variants="primary" size="md" text="Add Content" startIcon={<PlusIcon  size="md"/>}></Button>
+            <Button variants="primary" size="md" text="Add Content" startIcon={<PlusIcon  size="md" />} onClick={()=>{setModalOpen(true)}}></Button>
             </div> 
         </div>
 
@@ -36,6 +40,7 @@ export const DashBoard = () => {
             <Card title="first youtube" type="youtube" link="https://www.youtube.com/watch?v=Oo3qsxihXqY&ab_channel=HarkiratSingh"></Card>
         </div>
     </div>
+        <CreateContentModal open={modalOpen} onClose={()=>{setModalOpen(false)}}></CreateContentModal>
     </>
   )
 }
