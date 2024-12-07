@@ -5,10 +5,13 @@ import { signin } from './controllers/signin';
 import { userAuth } from './middleware/userAuth';
 import { contentRouter } from './routes/content';
 import { brainRouter } from './routes/brain';
+import  cors from 'cors';
 
 const app = express(); 
 
 app.use(express.json())
+
+app.use(cors())
 
 mongoose.connect('mongodb+srv://ashim:ashim12345@taskmanagerproject.zdfcogy.mongodb.net/brainly')
 

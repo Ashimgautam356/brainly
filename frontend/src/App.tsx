@@ -1,11 +1,18 @@
-import { DashBoard } from "./pages/DashBoard"
+import { DashBoard } from "./pages/Dashboard"
 import { Signup } from "./pages/Signup"
+import { Signin } from "./pages/Signin"
+
+import { BrowserRouter,Routes,Route } from "react-router-dom"
 
 export const App = () => {
   return (
-    <div>
-      {/* <DashBoard></DashBoard> */}
-      <Signup></Signup>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/signup" index element={<Signup></Signup>}></Route>
+        <Route path="/signin" element={<Signin></Signin>}></Route>
+        <Route path="/dashboard" element={<DashBoard></DashBoard>}></Route>
+      </Routes>
+    
+    </BrowserRouter>
   )
 }

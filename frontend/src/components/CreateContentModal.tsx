@@ -3,6 +3,9 @@ import { CrossIcon } from '../icons/CrossIcon'
 import { Button } from './Button'
 import { Input } from './Input'
 export const CreateContentModal = ({open,onClose}:{open:boolean,onClose:()=>void}) => {
+    const titleRef = React.useRef()
+    const linkRef = React.useRef()
+
   return (
     <div >
         {open && <div className='w-screen h-screen bg-slate-500 fixed top-0 left-0 opacity-60 flex justify-center'>
@@ -15,8 +18,8 @@ export const CreateContentModal = ({open,onClose}:{open:boolean,onClose:()=>void
                         </div>
                     </div>
                     <div>
-                        <Input placeholder='Title' ></Input>
-                        <Input placeholder='Link' ></Input>
+                        <Input ref={titleRef} placeholder='Title' ></Input>
+                        <Input ref={linkRef} placeholder='Link' ></Input>
                     </div>
                     <div className=' flex justify-center'>
 
