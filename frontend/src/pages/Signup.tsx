@@ -13,7 +13,7 @@ export const Signup = () => {
     const signup = async()=>{
         const userName = userNameRef.current?.value
         const password = passwordRef.current?.value
-        const resp = await axios.post(`${BACKEND_URL}api/v1/signup`,{
+        const resp = await axios.post(`${BACKEND_URL}/signup`,{
                 userName,
                 password
         })
