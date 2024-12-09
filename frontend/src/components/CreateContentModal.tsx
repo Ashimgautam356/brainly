@@ -1,9 +1,8 @@
 import React from 'react'
 import { CrossIcon } from '../icons/CrossIcon'
 import { Button } from './Button'
-import { Input } from './Input'
 import axios from 'axios'
-import { BACKEND_URL } from '../Config'
+import { BACKEND_URL } from '../config'
 
 
 export const CreateContentModal = ({open,onClose}:{open:boolean,onClose:()=>void}) => {
@@ -25,7 +24,7 @@ export const CreateContentModal = ({open,onClose}:{open:boolean,onClose:()=>void
             }
         })
 
-        respo
+        
     }
 
   return (
@@ -46,8 +45,7 @@ export const CreateContentModal = ({open,onClose}:{open:boolean,onClose:()=>void
                         </div>
                     </div>
                     <div>
-                        <Input reference={titleRef} placeholder='Title' ></Input>
-                        <Input reference={linkRef} placeholder='Link' ></Input>
+                    
                     </div>
                     <div className=' flex justify-center'>
 

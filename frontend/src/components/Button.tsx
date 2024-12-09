@@ -8,6 +8,7 @@ interface ButtonProps{
   onClick?:()=>void,
   fullWidth?:boolean,
   loading?:boolean,
+  type?:"submit"
 }
 
 const variantsStyle={
@@ -23,9 +24,9 @@ const defalutStyle = "flex justify-center items-center rounded-md"
 
 
 
-export const Button = ({variants,text,startIcon,size,onClick,fullWidth,loading}:ButtonProps) => {
+export const Button = ({variants,text,startIcon,size,onClick,fullWidth,loading,type}:ButtonProps) => {
   return (
-    <button className={`${defalutStyle} ${variantsStyle[variants]} ${sizeStyle[size]} ${fullWidth? " w-full flex justify-center items-center":""}  ${loading? " opacity-45":""}`} onClick={onClick} disabled={loading}>
+    <button type={type} className={`${defalutStyle} ${variantsStyle[variants]} ${sizeStyle[size]} ${fullWidth? " w-full flex justify-center items-center":""}  ${loading? " opacity-45":""}`} onClick={onClick} disabled={loading}>
         {startIcon?<div className="pr-2">{startIcon}</div>:null}
         {text}
     </button>
