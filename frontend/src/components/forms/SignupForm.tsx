@@ -5,7 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import { BACKEND_URL } from '../../config'
 import { useNavigate } from 'react-router-dom'
- 
+import { Popup } from '../Popup'
+ import React from 'react'
 
 const signupSchema  = z.object({
     userName:z.string({message:"must be type string"}).min(3,{message:"min length should be 3"}).max(10,{message:"max length should be 8"}),
@@ -22,9 +23,9 @@ type FromFields = z.infer<typeof signupSchema>
 export const SignupForm = () => {
 
     const navigate = useNavigate()
+    const [isPopupVisible, setPopupVisible] = React.useState(false);
 
-
-    const{register,handleSubmit,setError,formState:{errors}} = useForm<FromFields>({
+    const{register,handleSubmit,setError,formState:{errors,isSubmitting}} = useForm<FromFields>({
         resolver:zodResolver(signupSchema)
     })
     const onSubmit:SubmitHandler<FromFields>= async(data)=>{
@@ -40,7 +41,12 @@ export const SignupForm = () => {
         })
         
         if(resp.status==200){
-            navigate("/")
+            setPopupVisible(true)
+            
+            setTimeout(()=>{
+                setPopupVisible(false)
+                navigate("/")
+            },2000)
         }
         }catch(err){
             if(axios.isAxiosError(err)){
@@ -57,6 +63,8 @@ export const SignupForm = () => {
         
     }
   return (
+    <>
+    
     <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col'>
         <input {...register("email")} placeholder='email:- jhondoe123@gmail.com' type="text" className='px-4 py-2 border rounded m-2' required={true}/>
         {errors.email && <p className='text-red-500 text-xs pl-4 ' >{errors.email?.message}</p>}
@@ -68,8 +76,15 @@ export const SignupForm = () => {
 
         {errors.root && <p className='text-red-500 text-sm pl-4 w-64 '>{errors.root.message}</p>}   
         <div className='flex justify-center w-full mt-8'>
-            <Button variants='primary' text='Signup' size='md' type='submit' fullWidth={true} loading={false}></Button>       
+            <Button variants='primary' text='Signup' size='md' type='submit' fullWidth={true} loading={isSubmitting} ></Button>       
         </div>  
     </form>
+
+
+    {
+        isPopupVisible && <Popup title={"Account Created"} variant='success'></Popup>
+    }
+    </>
+
   )
 }
