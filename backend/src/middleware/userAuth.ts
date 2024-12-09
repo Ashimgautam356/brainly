@@ -3,7 +3,6 @@ import jwt,{JwtPayload} from 'jsonwebtoken'
 
 export const userAuth = async(req:Request,res:Response,next:NextFunction)=>{
     const userToken = req.headers.token ;
-    console.log(userToken)
     if(!userToken){
         res.status(404).json({
             "message":"token not found"

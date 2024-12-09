@@ -19,21 +19,23 @@ const db_1 = require("../db");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userLoginSchema = zod_1.z.object({
-        userName: zod_1.z.string().email(),
-        password: zod_1.z.string()
+        email: zod_1.z.string().email({ message: "should be in a email format" }),
+        password: zod_1.z.string().min(8, { message: "minimum length should be 8" }).max(20).regex(new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$'), {
+            message: 'Password must be at least 8 characters and contain an uppercase letter, lowercase letter, and number'
+        })
     });
     // type userType = z.infer<typeof userLoginSchema>
     const isSchemaValid = userLoginSchema.safeParse(req.body);
     if (!isSchemaValid.success) {
         const validationError = isSchemaValid.error.formErrors;
         res.status(411).json({
-            "userName": validationError.fieldErrors.userName,
+            "email": validationError.fieldErrors.email,
             "passwrod": validationError.fieldErrors.password
         });
         return;
     }
-    const { userName, password } = req.body;
-    const user = yield db_1.userModel.findOne({ userName: userName });
+    const { email, password } = req.body;
+    const user = yield db_1.userModel.findOne({ email: email });
     if (!user) {
         res.status(404).json({
             "message": "user not found with that userName"

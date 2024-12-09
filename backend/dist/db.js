@@ -8,6 +8,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const mongoose_2 = require("mongoose");
 const userSchema = new mongoose_1.default.Schema({
     userName: { type: String, require: true, unique: true },
+    email: { type: String, require: true, unique: true },
     password: { type: String, require: true }
 });
 const tagSchema = new mongoose_1.default.Schema({

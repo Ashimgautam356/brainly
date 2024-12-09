@@ -23,12 +23,12 @@ export const SigninForm = () => {
     const{register,handleSubmit,formState:{errors},setError} = useForm<FromFields>()
 
     const onSubmit:SubmitHandler<FromFields>= async(data)=>{
-        const userName = data.email
+        const email = data.email
         const password = data.password
 
         try{
             const resp = await axios.post(`${BACKEND_URL}/signin`,{
-                userName,
+                email,
                 password
         })
         

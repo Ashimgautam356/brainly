@@ -6,8 +6,11 @@ import jwt from 'jsonwebtoken'
 
 export const signin = async(req:Request,res:Response)=>{
     const userLoginSchema = z.object({
-        userName:z.string().email(),
-        password:z.string()
+        email:z.string().email({message:"should be in a email format"}),
+        password:z.string().min(8,{message:"minimum length should be 8"}).max(20).regex(new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$'), {
+            message:
+            'Password must be at least 8 characters and contain an uppercase letter, lowercase letter, and number'
+        })
     })
     // type userType = z.infer<typeof userLoginSchema>
 
@@ -15,15 +18,15 @@ export const signin = async(req:Request,res:Response)=>{
     if(!isSchemaValid.success){
         const validationError = isSchemaValid.error.formErrors;
         res.status(411).json({
-            "userName":validationError.fieldErrors.userName,
+            "email":validationError.fieldErrors.email,
             "passwrod":validationError.fieldErrors.password
         })
         return;
         
     }
 
-    const {userName,password} = req.body
-    const user = await userModel.findOne({userName:userName})
+    const {email,password} = req.body
+    const user = await userModel.findOne({email:email})
 
     if(!user){
         res.status(404).json({

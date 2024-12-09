@@ -24,22 +24,37 @@ export const SignupForm = () => {
     const navigate = useNavigate()
 
 
-    const{register,handleSubmit,formState:{errors}} = useForm<FromFields>({
+    const{register,handleSubmit,setError,formState:{errors}} = useForm<FromFields>({
         resolver:zodResolver(signupSchema)
     })
     const onSubmit:SubmitHandler<FromFields>= async(data)=>{
         const userName = data.userName
         const email = data.email
         const password = data.password
-        const resp = await axios.post(`${BACKEND_URL}/signup`,{
-            userName,
-            email,
-            password
-    })
-    
-    if(resp.status==200){
-        navigate("/signin")
-    }
+
+        try{
+            const resp = await axios.post(`${BACKEND_URL}/signup`,{
+                userName,
+                email,
+                password
+        })
+        
+        if(resp.status==200){
+            navigate("/")
+        }
+        }catch(err){
+            if(axios.isAxiosError(err)){
+                setError("root",{
+                    message: err.response?.data?.message
+                })
+            }
+            else{
+                setError("root",{
+                    message:"An unexpected error occurred"
+                })
+            }
+        }
+        
     }
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col'>
@@ -51,6 +66,7 @@ export const SignupForm = () => {
         <input {...register("password")} placeholder='password:- jhondoe123' type="password" className='px-4 py-2 border rounded m-2' required={true} />
         {errors.password && <p className='text-red-500 text-xs pl-4 w-64 ' >{errors.password?.message}</p>}
 
+        {errors.root && <p className='text-red-500 text-sm pl-4 w-64 '>{errors.root.message}</p>}   
         <div className='flex justify-center w-full mt-8'>
             <Button variants='primary' text='Signup' size='md' type='submit' fullWidth={true} loading={false}></Button>       
         </div>  

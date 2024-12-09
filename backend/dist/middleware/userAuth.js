@@ -16,7 +16,6 @@ exports.userAuth = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const userAuth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const userToken = req.headers.token;
-    console.log(userToken);
     if (!userToken) {
         res.status(404).json({
             "message": "token not found"
