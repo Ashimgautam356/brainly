@@ -13,14 +13,13 @@ const tagSchema = new mongoose.Schema({
 })
 
 
- export const contentTypes = ['image', 'video', 'article', 'audio']
+ export const contentTypes = ['youtube', 'twitter', 'instagram', 'facebook',"other"]
 
 
 const contentSchema = new mongoose.Schema({
     link:{type:String, require:true},
     type:{type:String, enum:contentTypes, require:true},
     title:{type:String, require:true},
-    tags: {type:[String]},
     userId:{type:Types.ObjectId, ref:'User', require:true},
 
 })

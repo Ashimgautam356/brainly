@@ -14,12 +14,11 @@ const userSchema = new mongoose_1.default.Schema({
 const tagSchema = new mongoose_1.default.Schema({
     tags: { type: String, require: true, unique: true }
 });
-exports.contentTypes = ['image', 'video', 'article', 'audio'];
+exports.contentTypes = ['youtube', 'twitter', 'instagram', 'facebook', "other"];
 const contentSchema = new mongoose_1.default.Schema({
     link: { type: String, require: true },
     type: { type: String, enum: exports.contentTypes, require: true },
     title: { type: String, require: true },
-    tags: { type: [String] },
     userId: { type: mongoose_2.Types.ObjectId, ref: 'User', require: true },
 });
 const link = new mongoose_1.default.Schema({

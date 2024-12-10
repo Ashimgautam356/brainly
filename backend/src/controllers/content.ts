@@ -24,10 +24,9 @@ export const getContent = async(req:Request,res:Response)=>{
 export const postContent = async (req:Request,res:Response)=>{
 
     const contentSchema = z.object({
-        type: z.enum(['image', 'video', 'article', 'audio'],{message:"type should be either image,video,article or audio"}),
+        type: z.enum(['youtube', 'twitter', 'instagram', 'facebook',"other"],{message:"type should be either image,video,article or audio"}),
         link:z.string({message:"should be sting"}),
         title:z.string({message:"should be sting"}),
-        tags: z.array(z.string())
     })
 
     
@@ -35,7 +34,6 @@ export const postContent = async (req:Request,res:Response)=>{
         type:req.body.type,
         link:req.body.link,
         title:req.body.title,
-        tags:req.body.tags
     })
 
     if(!isValidSchema.success){
@@ -44,14 +42,12 @@ export const postContent = async (req:Request,res:Response)=>{
             type:formatedMessage.fieldErrors.type,
             link:formatedMessage.fieldErrors.link,
             title:formatedMessage.fieldErrors.title,
-            tags:formatedMessage.fieldErrors.tags,
             
         })
         return; 
     }
     const link = req.body.link
     const title =req.body.title
-    const tags = req.body.tags
     const type = req.body.type
     const id = req.body.id
     try{
@@ -59,7 +55,6 @@ export const postContent = async (req:Request,res:Response)=>{
             link:link,
             type:type,
             title:title,
-            tags:tags,
             userId:id
         })
         res.status(200).json({
