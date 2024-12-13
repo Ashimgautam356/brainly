@@ -12,7 +12,7 @@ const tagSchema = new mongoose.Schema({
 })
 
 
- export const contentTypes = ['youtube', 'twitter', 'instagram', 'facebook',"other"]
+ export const contentTypes = ['youtube', 'twitter',"other"]
 
 
 const contentSchema = new mongoose.Schema({
