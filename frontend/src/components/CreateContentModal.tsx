@@ -1,9 +1,12 @@
+import { useNavigate } from 'react-router-dom'
+import { useContent } from '../hooks/useContent'
 import { CrossIcon } from '../icons/CrossIcon'
 import { ContentForm } from './forms/ContentForm'
 
 
 export const CreateContentModal = ({open,onClose}:{open:boolean,onClose:()=>void}) => {
 
+    const navigate= useNavigate()
   return (
     <div >
         {open && <div>
@@ -17,12 +20,17 @@ export const CreateContentModal = ({open,onClose}:{open:boolean,onClose:()=>void
                 <span className='bg-white opacity-100  p-4 rounded max-w-80'>
                     <div className='flex justify-between items-center  '>
                         <p className='font-medium text-xl'>Add Content</p>
-                        <div onClick={onClose} className='cursor-pointer'>
+                        <div onClick={()=>{
+
+                            onClose()
+                            navigate('/dashboard')
+
+                        }} className='cursor-pointer'>
                             <CrossIcon size='md'></CrossIcon>
                         </div>
                     </div>
                     <div className='mt-4 flex justify-center'>
-                        <ContentForm></ContentForm>
+                        <ContentForm onClick={onClose}></ContentForm>
                     </div>
                 </span>
             </div>

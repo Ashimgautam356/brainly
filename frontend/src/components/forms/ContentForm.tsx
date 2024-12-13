@@ -24,12 +24,12 @@ const ContentSchema  = z.object({
 type ContentsType = z.infer<typeof ContentSchema>
 
 
-export const ContentForm = () => {
+export const ContentForm = ({onClick}:{onClick: ()=>void}) => {
 
     const [isPopupVisible, setPopupVisible] = React.useState(false);
     const navigate = useNavigate()
 
-  const {register,handleSubmit,formState:{errors},setError} = useForm<ContentsType>({
+  const {register,handleSubmit,formState:{errors},setError,reset} = useForm<ContentsType>({
     resolver:zodResolver(ContentSchema)
   })
     const [userType , setUserType] = React.useState(ContentType.Youtube)
@@ -40,7 +40,6 @@ export const ContentForm = () => {
       const type = userType
       const token = localStorage.getItem("token") as string
       const currentDate = new Date()
-      console.log(typeof currentDate)
       try{
         const response = await axios.post(`${BACKEND_URL}/content/postContent`,{
           title,
@@ -55,10 +54,11 @@ export const ContentForm = () => {
 
         if(response.status==200){
           setPopupVisible(true)
+          reset()
           
           setTimeout(()=>{
             setPopupVisible(false)
-            navigate("/dashboard")
+            onClick()
         },2000)
         }
 
