@@ -5,9 +5,12 @@ import { UserIcon } from "../icons/UserIcon"
 import { YouttubeIcon } from "../icons/YouttubeIcon"
 import { Button } from "./Button"
 import SideBarItem from "./SideBarItem"
+import InstagramIcon from "../icons/InstagramIcon"
+import Facebook from "../icons/Facebook"
+import OtherIcon from "../icons/OtherIcon"
 
 
-export const SideBar = () => {
+export const SideBar = ({userName}:{userName:string}) => {
   const navigate = useNavigate()
 
   const logout =()=>{
@@ -28,6 +31,7 @@ export const SideBar = () => {
             <div className="pt-8 pl-4">
               <SideBarItem text="Twitter" icon={<TwitterIcon size="md"/>}></SideBarItem>
               <SideBarItem text="YouTube" icon={<YouttubeIcon size="md"/>}></SideBarItem>
+              <SideBarItem text="Other" icon={<OtherIcon size="md"/>}></SideBarItem>
             </div>
           </div>
 
@@ -37,7 +41,7 @@ export const SideBar = () => {
               <Button text="Logout" variants="primary" size="md" onClick={logout}></Button>
               </div>
               <div className="pl-4 flex flex-wrap">
-                <p className="text-lg font-semibold pr-2">{"hello"}</p>
+                <p className="text-lg font-semibold pr-2">{userName}</p>
                 <UserIcon size="lg"></UserIcon>
               </div>
             </div>

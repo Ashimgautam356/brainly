@@ -36,11 +36,13 @@ const postContent = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         type: zod_1.z.enum(['youtube', 'twitter', 'instagram', 'facebook', "other"], { message: "type should be either image,video,article or audio" }),
         link: zod_1.z.string({ message: "should be sting" }),
         title: zod_1.z.string({ message: "should be sting" }),
+        date: zod_1.z.string()
     });
     const isValidSchema = contentSchema.safeParse({
         type: req.body.type,
         link: req.body.link,
         title: req.body.title,
+        date: req.body.date
     });
     if (!isValidSchema.success) {
         const formatedMessage = isValidSchema.error.formErrors;
@@ -48,19 +50,22 @@ const postContent = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             type: formatedMessage.fieldErrors.type,
             link: formatedMessage.fieldErrors.link,
             title: formatedMessage.fieldErrors.title,
+            date: formatedMessage.fieldErrors.date
         });
         return;
     }
     const link = req.body.link;
     const title = req.body.title;
     const type = req.body.type;
+    const date = req.body.date;
     const id = req.body.id;
     try {
         yield db_1.contentModel.create({
             link: link,
             type: type,
             title: title,
-            userId: id
+            userId: id,
+            date: date
         });
         res.status(200).json({
             "message": "your content has been saved"

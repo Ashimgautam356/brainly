@@ -27,6 +27,7 @@ export const postContent = async (req:Request,res:Response)=>{
         type: z.enum(['youtube', 'twitter', 'instagram', 'facebook',"other"],{message:"type should be either image,video,article or audio"}),
         link:z.string({message:"should be sting"}),
         title:z.string({message:"should be sting"}),
+        date:z.date()
     })
 
     
@@ -34,6 +35,7 @@ export const postContent = async (req:Request,res:Response)=>{
         type:req.body.type,
         link:req.body.link,
         title:req.body.title,
+        date:req.body.date
     })
 
     if(!isValidSchema.success){
@@ -42,6 +44,7 @@ export const postContent = async (req:Request,res:Response)=>{
             type:formatedMessage.fieldErrors.type,
             link:formatedMessage.fieldErrors.link,
             title:formatedMessage.fieldErrors.title,
+            date:formatedMessage.fieldErrors.date
             
         })
         return; 
@@ -49,13 +52,15 @@ export const postContent = async (req:Request,res:Response)=>{
     const link = req.body.link
     const title =req.body.title
     const type = req.body.type
+    const date = req.body.date
     const id = req.body.id
     try{
         await contentModel.create({
             link:link,
             type:type,
             title:title,
-            userId:id
+            userId:id,
+            date:date
         })
         res.status(200).json({
             "message":"your content has been saved"

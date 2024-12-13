@@ -1,4 +1,4 @@
-import { IconProps, iconStyle } from "."
+import { IconProps, iconStyle } from "./index"
 
 export const YouttubeIcon = ({size}:IconProps) => {
   return (

@@ -20,6 +20,7 @@ const contentSchema = new mongoose_1.default.Schema({
     type: { type: String, enum: exports.contentTypes, require: true },
     title: { type: String, require: true },
     userId: { type: mongoose_2.Types.ObjectId, ref: 'User', require: true },
+    date: { type: String, require: true }
 });
 const link = new mongoose_1.default.Schema({
     hash: { type: String, required: true },

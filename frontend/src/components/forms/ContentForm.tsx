@@ -13,8 +13,6 @@ import { Popup } from '../Popup'
 enum ContentType {
     Youtube = "youtube",
     Twitter = "twitter",
-    Instagram = "instagram",
-    Facebook = 'facebook',
     Other = 'other'
 }
 
@@ -41,11 +39,14 @@ export const ContentForm = () => {
       const link = data.link
       const type = userType
       const token = localStorage.getItem("token") as string
+      const currentDate = new Date()
+      console.log(typeof currentDate)
       try{
         const response = await axios.post(`${BACKEND_URL}/content/postContent`,{
           title,
           link,
-          type
+          type,
+          date:currentDate
         },{
           headers:{
             "token":token
@@ -53,6 +54,8 @@ export const ContentForm = () => {
         })
 
         if(response.status==200){
+          setPopupVisible(true)
+          
           setTimeout(()=>{
             setPopupVisible(false)
             navigate("/dashboard")
@@ -85,9 +88,6 @@ export const ContentForm = () => {
         <div className='w-full flex flex-col'>
             <p>Select Type</p>
             <div className='flex w-full flex-row gap-2 flex-wrap'>
-            <p  className={userType === ContentType.Facebook ? "bg-purple-600 text-white p-2 rounded-md cursor-pointer":"bg-purple-200 text-purple-600 p-2 rounded-md cursor-pointer"} onClick={()=>{setUserType(ContentType.Facebook)}}>FaceBook</p>
-
-            <p  className={userType === ContentType.Instagram? "bg-purple-600 text-white p-2 rounded-md cursor-pointer":"bg-purple-200 text-purple-600 p-2 rounded-md cursor-pointer"} onClick={()=>{setUserType(ContentType.Instagram)}}>Instagram</p>
             
             <p  className={userType === ContentType.Twitter? "bg-purple-600 text-white p-2 rounded-md cursor-pointer":"bg-purple-200 text-purple-600 p-2 rounded-md cursor-pointer"} onClick={()=>{setUserType(ContentType.Twitter)}}>Twitter</p>
 

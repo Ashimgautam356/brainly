@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { Types } from "mongoose";
-import { Schema } from "zod";
 
 const userSchema= new mongoose.Schema({
     userName: {type:String, require:true, unique:true},
@@ -21,6 +20,7 @@ const contentSchema = new mongoose.Schema({
     type:{type:String, enum:contentTypes, require:true},
     title:{type:String, require:true},
     userId:{type:Types.ObjectId, ref:'User', require:true},
+    date:{type:Date, require:true}
 
 })
 
