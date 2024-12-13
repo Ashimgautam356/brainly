@@ -1,12 +1,13 @@
 import axios from "axios"
 import { DeleteIcon } from "../icons/DeleteIcon"
-import Facebook from "../icons/Facebook"
-import InstagramIcon from "../icons/InstagramIcon"
 import OtherIcon from "../icons/OtherIcon"
 import { ShareIcon } from "../icons/ShareIcon"
 import { TwitterIcon } from "../icons/TwitterIcon"
 import { YouttubeIcon } from "../icons/YouttubeIcon"
 import { BACKEND_URL } from "../config"
+import React from "react"
+import { Popup } from "./Popup"
+
 
 interface CardProps{
   title: string,
@@ -24,24 +25,36 @@ const iconTypeStyle:any ={
 }
 
 export const Card = ({title,link,type,date,id}:CardProps) => {
+  const [isPopupVisible, setPopupVisible] = React.useState(false);
+
 
   const token = localStorage.getItem("token")
   
-  // const delteitem = async(id:string)=>{
-  //   try{
-  //     const response = await axios.delete(`${BACKEND_URL}/content/delete`,{
+  const delteitem = async(id:string)=>{
+    try{
+      const response = await axios.delete(`${BACKEND_URL}/content/delete/${id}`,{
+        headers:{token}
+      })
 
-  //     },{
-  //       "headers":{
-  //       "token": token
-  //       }
-  //     })
+      if(response.status==200){
+        setPopupVisible(true)
+          
+          setTimeout(()=>{
+            setPopupVisible(false)
+        },2000)
+      }
 
-  //   }catch(err){
-      
-  //   }
+    }catch(err){
+      if (axios.isAxiosError(err)) {
+
+        alert(err.response?.data?.message)
+      } else {
+
+        alert("an expected error occured")
+      }
+    }
     
-  // }
+  }
 
   
   // extracting the link id from the user's url
@@ -65,6 +78,7 @@ export const Card = ({title,link,type,date,id}:CardProps) => {
   }
 
   return (
+    <>
     <div className=" relative p-4 min-h-[25rem] bg-white flex flex-col justify-between rounded-lg border w-72 border-gray-200">
       <div>      
         <div className="flex flex-row justify-between">
@@ -82,14 +96,14 @@ export const Card = ({title,link,type,date,id}:CardProps) => {
             </div>
 
             <div className="text-gray-500">
-              <div>
+              <div onClick={()=>{delteitem(id)}} className="cursor-pointer">
                 <DeleteIcon size="sm"></DeleteIcon>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="pt-4 relative max-h-72 overflow-hidden">
+        <div className="pt-4 relative max-h-72 overflow-hidden ">
           {
             type == "youtube" && <iframe 
             className="w-full" 
@@ -123,6 +137,11 @@ export const Card = ({title,link,type,date,id}:CardProps) => {
       <div className="flex mt-5">
         <p className="text-gray-500 text-normal">{`Added on ${day?day:""}/${month?month:""}/${year?year:""}`}</p>
       </div>
+        
     </div>
+    {
+    isPopupVisible && <Popup title={"content has been deleted"} variant='plane'></Popup>
+    }
+    </>
   )
 }

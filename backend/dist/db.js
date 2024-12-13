@@ -14,13 +14,13 @@ const userSchema = new mongoose_1.default.Schema({
 const tagSchema = new mongoose_1.default.Schema({
     tags: { type: String, require: true, unique: true }
 });
-exports.contentTypes = ['youtube', 'twitter', 'instagram', 'facebook', "other"];
+exports.contentTypes = ['youtube', 'twitter', "other"];
 const contentSchema = new mongoose_1.default.Schema({
     link: { type: String, require: true },
     type: { type: String, enum: exports.contentTypes, require: true },
     title: { type: String, require: true },
     userId: { type: mongoose_2.Types.ObjectId, ref: 'User', require: true },
-    date: { type: String, require: true }
+    date: { type: Date, require: true }
 });
 const link = new mongoose_1.default.Schema({
     hash: { type: String, required: true },

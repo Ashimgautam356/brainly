@@ -4,9 +4,9 @@ import { ShareIcon } from "../icons/ShareIcon"
 import { Card } from "../components/Card"
 import {SideBar} from '../components/SideBar'
 import { CreateContentModal } from "../components/CreateContentModal"
-import { useEffect, useState } from "react"
-import axios from "axios"
-import { BACKEND_URL } from "../config"
+import {  useState } from "react"
+import { useContent } from "../hooks/useContent"
+import { useNavigate } from "react-router-dom"
 
 
 interface UserId {
@@ -17,7 +17,7 @@ interface UserId {
 interface ResposeType{
     _id:string,
     link:string,
-    type: "youtube"| "twitter"|"instagram"| "facebook"| "other",
+    type: "youtube"| "twitter"| "other",
     title:string,
     date:Date,
     userId: UserId
@@ -26,26 +26,14 @@ interface ResposeType{
 
 export const DashBoard = () => {
     const [modalOpen ,setModalOpen] = useState(false)
-    const [userContent,setUserContent] =useState([])
     const token = localStorage.getItem("token")
-    
-    useEffect(() => {
-        const fetchContent = async () => {
-          try {
-            const response = await axios.get(`${BACKEND_URL}/content/allContent`, {
-              headers: { token },
-            });
-            if(response.status==200){
-                setUserContent(response.data.data);
-            }
-            // Access the nested data structure
-          } catch (error) {
-            console.error("Failed to fetch content:", error);
-          }
-        };
-      
-        fetchContent();
-      }, [token]);
+
+    const navigate = useNavigate()
+
+    if(!token){
+        navigate('/')
+    }
+    const userContent = useContent()
 
   return (
     <>
@@ -78,7 +66,7 @@ export const DashBoard = () => {
                 userContent?.map((contents:ResposeType)=>{
                     
                     return(
-                        <Card date={contents?.date} title={(contents?.title)} type={(contents?.type)} link={contents?.link} key={contents?._id}></Card>
+                        <Card date={contents?.date} title={(contents?.title)} type={(contents?.type)} link={contents?.link} key={contents?._id} id={contents._id}></Card>
                     )
                 })
             }

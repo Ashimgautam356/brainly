@@ -80,7 +80,7 @@ const postContent = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 exports.postContent = postContent;
 // deleteContent 
 const deleteContent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const contentId = req.body.contentId;
+    const contentId = req.params.id;
     try {
         const deltedContent = yield db_1.contentModel.deleteOne({
             _id: contentId,

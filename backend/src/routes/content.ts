@@ -7,4 +7,4 @@ contentRouter.get('/allContent',getContent)
 // adding 
 contentRouter.post('/postContent',postContent)
 // deleting
-contentRouter.delete('/delete',deleteContent)
+contentRouter.delete('/delete/:id',deleteContent)

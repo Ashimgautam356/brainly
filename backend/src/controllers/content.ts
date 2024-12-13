@@ -27,7 +27,7 @@ export const postContent = async (req:Request,res:Response)=>{
         type: z.enum(['youtube', 'twitter', 'instagram', 'facebook',"other"],{message:"type should be either image,video,article or audio"}),
         link:z.string({message:"should be sting"}),
         title:z.string({message:"should be sting"}),
-        date:z.date()
+        date:z.string()
     })
 
     
@@ -77,8 +77,7 @@ export const postContent = async (req:Request,res:Response)=>{
 
 // deleteContent 
 export const deleteContent  = async (req:Request,res:Response)=>{
-    const contentId = req.body.contentId;
-    
+    const contentId = req.params.id;
     try{
         const deltedContent = await contentModel.deleteOne({
             _id:contentId,
