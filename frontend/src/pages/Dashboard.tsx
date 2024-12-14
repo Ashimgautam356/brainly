@@ -7,6 +7,7 @@ import { CreateContentModal } from "../components/CreateContentModal"
 import {  useState } from "react"
 import { useContent } from "../hooks/useContent"
 import { useNavigate } from "react-router-dom"
+import { Sharelink } from "../components/Sharelink"
 
 
 interface UserId {
@@ -26,6 +27,7 @@ interface ResposeType{
 
 export const DashBoard = () => {
     const [modalOpen ,setModalOpen] = useState(false)
+    const [sharelink,setSharelink] = useState(false)
     const token = localStorage.getItem("token")
 
     const navigate = useNavigate()
@@ -53,7 +55,7 @@ export const DashBoard = () => {
             </div>  
             <div className=" flex">
                 <div className="mr-4">
-                    <Button variants="secondary" size="md" text="Share" startIcon={<ShareIcon  size="md"/>}></Button >
+                    <Button variants="secondary" size="md" text="Share" startIcon={<ShareIcon  size="md"/>} onClick={()=>{setSharelink(true)}}></Button >
 
                 </div>
             <Button variants="primary" size="md" text="Add Content" startIcon={<PlusIcon  size="md" />} onClick={()=>{setModalOpen(true)}}></Button>
@@ -75,6 +77,7 @@ export const DashBoard = () => {
         </div>
     </div>
         <CreateContentModal open={modalOpen} onClose={()=>{setModalOpen(false)}}></CreateContentModal>
+        <Sharelink open={sharelink} onClose={()=>{setSharelink(false)}} id={useContent[0]?.useId._id}></Sharelink>
     </>
   )
 }
