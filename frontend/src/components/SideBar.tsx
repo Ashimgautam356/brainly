@@ -7,10 +7,12 @@ import { Button } from "./Button"
 import SideBarItem from "./SideBarItem"
 import { NavLink } from "react-router-dom"
 import OtherIcon from "../icons/OtherIcon"
+import { useRef } from "react"
 
 
 export const SideBar = ({userName}:{userName:string}) => {
   const navigate = useNavigate()
+  let userCopiedLink = useRef()
 
   const logout =()=>{
     localStorage.removeItem("token") 
@@ -46,6 +48,13 @@ export const SideBar = ({userName}:{userName:string}) => {
           </div>
 
           <div className="p-8">
+            <div className="mb-8">
+              <div className="flex justify-between ">
+              <input type="text"  className="w-32 p-1" placeholder="paste link here" required/>
+              <button className="p-1 bg-purple-200 text-purple-600 font-semibold rounded-md cursor-pointer" onClick={}>Submit</button>
+              </div>
+
+            </div>
             <div className="flex flex-row justify-between items-center">
               <div>
               <Button text="Logout" variants="primary" size="md" onClick={logout}></Button>
