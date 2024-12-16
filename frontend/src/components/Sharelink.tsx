@@ -9,10 +9,22 @@ interface LinkData{
 }
 
 
-export const Sharelink = ({open,onClose,id}:{open:boolean,onClose:()=>void,id:string}) => {
+export const Sharelink = ({open,onClose}:{open:boolean,onClose:()=>void}) => {
     const[isSharing,setIsSharing] = useState(true)
-    const link:LinkData = useLink(id,isSharing)
-    console.log(link)
+    const [link,setLink] = useState<LinkData>({})
+
+
+    const fetchedLink = useLink(isSharing);
+
+  React.useEffect(() => {
+    setLink(fetchedLink);
+  }, [fetchedLink]);
+
+  function handleClick() {
+    setIsSharing((prevIsSharing) => !prevIsSharing);
+  }
+
+  console.log(link)
   return (
     <>
         {open && <div>
@@ -28,7 +40,7 @@ export const Sharelink = ({open,onClose,id}:{open:boolean,onClose:()=>void,id:st
                                     </div>
                                 </div>
                                 {
-                                        isSharing? <p className='p-1 w-20  text-xs border border-red-500 rounded-md cursor-pointer text-white bg-red-500' onClick={()=>setIsSharing(false)}>Remove Link</p>:<p className='p-1 w-20 text-xs border border-green-500 rounded-md cursor-pointer text-white bg-green-500' onClick={()=>setIsSharing(true)}>Create link</p>
+                                        isSharing ? <p className='p-1 w-20  text-xs border border-red-500 rounded-md cursor-pointer text-white bg-red-500' onClick={handleClick}>Remove Link</p>:<p className='p-1 w-20 text-xs border border-green-500 rounded-md cursor-pointer text-white bg-green-500' onClick={handleClick}>Create link</p>
                                     }
                                 <div className='flex justify-between items-center mt-4'>
                                     {

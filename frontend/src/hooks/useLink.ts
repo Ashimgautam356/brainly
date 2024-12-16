@@ -3,49 +3,26 @@ import { BACKEND_URL } from "../config"
 import axios, { AxiosResponse } from "axios"
 
 
-export  function useLink(id:string,currentState:boolean){
+export  function useLink(currentState:boolean){
     const token = localStorage.getItem("token")
-    console.log(currentState)
     const [shareAbleLink,setShareAbleLink] = useState({}) 
-
-    currentState?getlink():removelink()
-
-     function getlink(){
-        useEffect(()=>{
-            try{
-                const link =  axios.post(`${BACKEND_URL}/brain/share`,{
-                    share:currentState
-                    
-                },{
-                    headers:{
-                        token:token
-                    }
-                }).then(res=> setShareAbleLink(res.data))
-        
-            }catch(err){
-                console.log(err)
-            }
-        },[])
-        
-    }
-     function removelink(){
-        useEffect(()=>{
-            try{
-                const link = axios.post(`${BACKEND_URL}/brain/share`,{
-                    share:currentState
-                    
-                },{
-                    headers:{
-                        token:token
-                    }
-                }).then(res=> setShareAbleLink(res.data))
-        
-            }catch(err){
-                console.log(err)
-            }
-        },[])
-        
-    }
     
+    
+    useEffect(() => {
+        const fetchLink = async () => {
+          try {
+            const response = await axios.post(
+              `${BACKEND_URL}/brain/share`,
+              { share: currentState },
+              { headers: { token } }
+            );
+            setShareAbleLink(response.data);
+          } catch (err) {
+            console.error("Error fetching link:", err);
+          }
+        };
+    
+        fetchLink();
+      }, [currentState, token]);
     return shareAbleLink
 }
