@@ -7,12 +7,33 @@ import { Button } from "./Button"
 import SideBarItem from "./SideBarItem"
 import { NavLink } from "react-router-dom"
 import OtherIcon from "../icons/OtherIcon"
-import { useRef } from "react"
+import { useState } from "react"
+import axios from "axios"
+import { BACKEND_URL } from "../config"
 
 
 export const SideBar = ({userName}:{userName:string}) => {
+  const [userInput,setUserInput] = useState('')
   const navigate = useNavigate()
-  let userCopiedLink = useRef()
+  const token = localStorage.getItem("token")
+
+  const onClickHandler = async ()=>{
+    if(userInput.length>1){
+      try{
+        console.log(userInput)
+        const response = await axios.get(`${BACKEND_URL}/brain/${userInput}`,{headers:{token:token}})
+        
+        if(response.status ==200){
+          navigate(`brain/${userInput}`)
+        }
+
+      }catch(er){
+          console.log(er)
+      }
+
+
+    }
+  }
 
   const logout =()=>{
     localStorage.removeItem("token") 
@@ -50,8 +71,10 @@ export const SideBar = ({userName}:{userName:string}) => {
           <div className="p-8">
             <div className="mb-8">
               <div className="flex justify-between ">
-              <input type="text"  className="w-32 p-1" placeholder="paste link here" required/>
-              <button className="p-1 bg-purple-200 text-purple-600 font-semibold rounded-md cursor-pointer" onClick={}>Submit</button>
+         
+                  <input type="text"  className="w-32 p-1" placeholder="paste link here" required onChange={(e)=>{e.preventDefault(); setUserInput(e.target.value)}}/>
+                  <button className="p-1 bg-purple-200 text-purple-600 font-semibold rounded-md cursor-pointer" onClick={onClickHandler}>Submit</button>
+                
               </div>
 
             </div>
