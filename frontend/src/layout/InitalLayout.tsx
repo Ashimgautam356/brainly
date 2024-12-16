@@ -21,7 +21,6 @@ export const InitalLayout = () => {
     }
     const userContent = useContent()
 
-    console.log(userContent)
 
     const outletContext = {
         setSharelink,

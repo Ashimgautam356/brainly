@@ -11,14 +11,14 @@ type OutletContextType = {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const TwitterPage = () => {
+export const OtherPage = () => {
     const{setSharelink,setModalOpen}:OutletContextType = useOutletContext()
-    const userContent = useContent().filter(content=>content.type =='twitter')
+    const userContent = useContent().filter(content=>content.type =='other')
   return (
  <>
      <div className="flex flex-row justify-between items-center py-12">
        <div className="text-3xl font-bold">
-        Twitter Notes
+        Other Notes
        </div>
        <div className=" flex">
          <div className="mr-4">

@@ -24,7 +24,6 @@ export const Sharelink = ({open,onClose}:{open:boolean,onClose:()=>void}) => {
     setIsSharing((prevIsSharing) => !prevIsSharing);
   }
 
-  console.log(link)
   return (
     <>
         {open && <div>

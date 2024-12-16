@@ -5,8 +5,7 @@ import { UserIcon } from "../icons/UserIcon"
 import { YouttubeIcon } from "../icons/YouttubeIcon"
 import { Button } from "./Button"
 import SideBarItem from "./SideBarItem"
-import InstagramIcon from "../icons/InstagramIcon"
-import Facebook from "../icons/Facebook"
+import { NavLink } from "react-router-dom"
 import OtherIcon from "../icons/OtherIcon"
 
 
@@ -24,14 +23,25 @@ export const SideBar = ({userName}:{userName:string}) => {
 
           <div>
             <div className="flex justify-between items-center w-44 pl-4">
+              <NavLink to={"."} className="flex">
               <BrainIcon size="lg" ></BrainIcon>
               <p className="text-xl font-bold">Second Brain</p>
+              </NavLink>
             </div>
 
             <div className="pt-8 pl-4">
-              <SideBarItem text="Twitter" icon={<TwitterIcon size="md"/>}></SideBarItem>
+              
+              <NavLink to={'twitter'}>
+                <SideBarItem text="Twitter" icon={<TwitterIcon size="md"/>}></SideBarItem>
+              </NavLink>
+              <NavLink to={'youtube'}>
               <SideBarItem text="YouTube" icon={<YouttubeIcon size="md"/>}></SideBarItem>
+
+              </NavLink>
+              <NavLink to={'other'}>
               <SideBarItem text="Other" icon={<OtherIcon size="md"/>}></SideBarItem>
+
+              </NavLink>
             </div>
           </div>
 

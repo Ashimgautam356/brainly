@@ -5,6 +5,8 @@ import { TwitterPage } from "./pages/TwitterPage"
 
 import { BrowserRouter,Routes,Route } from "react-router-dom"
 import { InitalLayout } from "./layout/InitalLayout"
+import { YoutubePage } from "./pages/YoutubePage"
+import { OtherPage } from "./pages/OtherPage"
 
 export const App = () => {
   return (
@@ -14,7 +16,9 @@ export const App = () => {
         <Route path="/" element={<Signin></Signin>}></Route>
         <Route path="/dashboard" element={<InitalLayout></InitalLayout>}>
           <Route index element={<DashBoard></DashBoard>}></Route>
-          <Route path="/twitter" element={<TwitterPage></TwitterPage>}></Route>
+          <Route path="twitter" element={<TwitterPage></TwitterPage>}></Route>
+          <Route path="youtube" element={<YoutubePage></YoutubePage>}></Route>
+          <Route path="other" element={<OtherPage></OtherPage>}></Route>
         </Route>
       </Routes>
     
