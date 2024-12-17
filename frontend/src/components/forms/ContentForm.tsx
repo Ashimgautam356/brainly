@@ -27,7 +27,6 @@ type ContentsType = z.infer<typeof ContentSchema>
 export const ContentForm = ({onClick}:{onClick: ()=>void}) => {
 
     const [isPopupVisible, setPopupVisible] = React.useState(false);
-    const navigate = useNavigate()
 
   const {register,handleSubmit,formState:{errors},setError,reset} = useForm<ContentsType>({
     resolver:zodResolver(ContentSchema)

@@ -70,8 +70,9 @@ export const Card = ({title,link,type,date,id}:CardProps) => {
   const paresedDate= new Date(date);
 
   const month = paresedDate?.getMonth()+1
-  const day = paresedDate?.getDay()
+  const day = paresedDate?.getDate()
   const year = paresedDate?.getFullYear()
+
 
   if(type === 'twitter'){
     link = link.replace("x.com","twitter.com")

@@ -14,7 +14,7 @@ type OutletContextType = {
 export const DashBoard = () => {
   const{setSharelink,setModalOpen}:OutletContextType = useOutletContext()
   const userContent = useContent()
-
+  
   return (
   <>
     <div className="flex flex-row justify-between items-center py-12">
@@ -34,7 +34,7 @@ export const DashBoard = () => {
   <div className="flex gap-8 flex-row flex-wrap ">
     {
       userContent?.map((contents: ResposeType) => {
-
+        console.log(contents.date)
         return (
           <Card date={contents?.date} title={(contents?.title)} type={(contents?.type)} link={contents?.link} key={contents?._id} id={contents._id}></Card>
         )

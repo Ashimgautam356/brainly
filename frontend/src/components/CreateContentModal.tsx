@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom'
-import { useContent } from '../hooks/useContent'
 import { CrossIcon } from '../icons/CrossIcon'
 import { ContentForm } from './forms/ContentForm'
 
