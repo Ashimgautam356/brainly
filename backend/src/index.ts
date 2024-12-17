@@ -38,12 +38,6 @@ app.use('/api/v1/brain',brainRouter)
 
 
 
-
-
-app.listen(3001,()=>{
-    console.log("server is up!!!!!")
-})
-
 // async function main(){
 //     await mongoose.connect('mongodb+srv://ashim:ashim12345@taskmanagerproject.zdfcogy.mongodb.net/brainly')
 //     app.listen(3001,()=>{
