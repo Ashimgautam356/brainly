@@ -6,6 +6,9 @@ import { userAuth } from './middleware/userAuth';
 import { contentRouter } from './routes/content';
 import { brainRouter } from './routes/brain';
 import  cors from 'cors';
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const app = express(); 
 
@@ -13,7 +16,7 @@ app.use(express.json())
 
 app.use(cors())
 
-mongoose.connect('mongodb+srv://ashim:ashim12345@taskmanagerproject.zdfcogy.mongodb.net/brainly')
+mongoose.connect(`${process.env.MONGO_URL}`)
 
 
 app.post('/api/v1/signup',signup)

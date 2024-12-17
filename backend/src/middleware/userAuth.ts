@@ -1,5 +1,8 @@
 import { Request,Response,NextFunction } from "express"
 import jwt,{JwtPayload} from 'jsonwebtoken'
+import dotenv from 'dotenv'
+dotenv.config()
+
 
 export const userAuth = async(req:Request,res:Response,next:NextFunction)=>{
     const userToken = req.headers.token ;
@@ -9,7 +12,7 @@ export const userAuth = async(req:Request,res:Response,next:NextFunction)=>{
         })
         return;
     }
-    const isValidToken = jwt.verify(String(userToken),"this is secrete")
+    const isValidToken = jwt.verify(String(userToken),`${process.env.JWT_SECRET}`)
 
     if(!isValidToken){
         res.status(404).json({

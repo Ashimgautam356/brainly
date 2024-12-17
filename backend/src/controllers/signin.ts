@@ -3,6 +3,9 @@ import { infer, z} from 'zod'
 import bcrypt from 'bcrypt'
 import { userModel } from "../db"
 import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 export const signin = async(req:Request,res:Response)=>{
     const userLoginSchema = z.object({
@@ -45,7 +48,7 @@ export const signin = async(req:Request,res:Response)=>{
 
     const token  = jwt.sign({
         id: String(user._id)
-    },"this is secrete")
+    },`${process.env.JWT_SECRET}`)
 
     res.status(200).json({
         "token":token
