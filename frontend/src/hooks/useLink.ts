@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { BACKEND_URL } from "../config"
-import axios, { AxiosResponse } from "axios"
+import axios from "axios"
 
 
 export  function useLink(currentState:boolean){
