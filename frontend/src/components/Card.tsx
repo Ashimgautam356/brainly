@@ -7,6 +7,8 @@ import { YouttubeIcon } from "../icons/YouttubeIcon"
 import { BACKEND_URL } from "../config"
 import React from "react"
 import { Popup } from "./Popup"
+import { useNavigate } from 'react-router-dom'
+
 
 
 interface CardProps{
@@ -27,6 +29,7 @@ const iconTypeStyle:any ={
 export const Card = ({title,link,type,date,id}:CardProps) => {
   const [isPopupVisible, setPopupVisible] = React.useState(false);
 
+  const navigate = useNavigate()
 
   const token = localStorage.getItem("token")
   
@@ -38,9 +41,9 @@ export const Card = ({title,link,type,date,id}:CardProps) => {
 
       if(response.status==200){
         setPopupVisible(true)
-          
-          setTimeout(()=>{
-            setPopupVisible(false)
+        setTimeout(()=>{
+          setPopupVisible(false)
+          navigate(0)
         },2000)
       }
 

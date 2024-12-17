@@ -5,9 +5,8 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import { BACKEND_URL } from '../../config'
-import { useNavigate } from 'react-router-dom'
 import { Popup } from '../Popup'
-
+import { useNavigate } from 'react-router-dom'
 
 
 enum ContentType {
@@ -25,6 +24,8 @@ type ContentsType = z.infer<typeof ContentSchema>
 
 
 export const ContentForm = ({onClick}:{onClick: ()=>void}) => {
+
+  const navigate = useNavigate()
 
     const [isPopupVisible, setPopupVisible] = React.useState(false);
 
@@ -55,8 +56,10 @@ export const ContentForm = ({onClick}:{onClick: ()=>void}) => {
           setPopupVisible(true)
           reset()
           
+          
           setTimeout(()=>{
             setPopupVisible(false)
+            navigate(0)
             onClick()
         },2000)
         }
