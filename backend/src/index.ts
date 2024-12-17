@@ -16,24 +16,25 @@ app.use(express.json())
 
 
 
-app.use((req, res, next) => {
+
+// CORS setup
+app.use(cors({
+    origin: "https://brainly-nu.vercel.app",
+    methods: ["POST", "GET", "DELETE"],
+    credentials: true
+}));
+
+
+// Handle preflight requests
+app.options('*', (req, res) => {
     res.header("Access-Control-Allow-Origin", "https://brainly-nu.vercel.app");
     res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
     res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
     res.header("Access-Control-Allow-Credentials", "true");
-    next();
+    res.status(204).end();
 });
 
-// CORS setup
-const corsOptions = {
-    origin: "https://brainly-nu.vercel.app",
-    methods: ["POST", "GET", "DELETE"],
-    credentials: true
-};
 
-app.use(cors(corsOptions));
-
-app.options('*', cors(corsOptions));
 
 mongoose.connect(`${process.env.MONGO_URL}`)
     .then(() => console.log("Connected to MongoDB"))
