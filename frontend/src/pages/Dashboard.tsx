@@ -34,7 +34,6 @@ export const DashBoard = () => {
   <div className="flex gap-8 flex-row flex-wrap ">
     {
       userContent?.map((contents: ResposeType) => {
-        console.log(contents.date)
         return (
           <Card date={contents?.date} title={(contents?.title)} type={(contents?.type)} link={contents?.link} key={contents?._id} id={contents._id}></Card>
         )

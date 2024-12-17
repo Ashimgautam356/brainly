@@ -18,6 +18,15 @@ const getContent = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const allContent = yield db_1.contentModel.find({
             userId: req.body.id
         }).populate("userId", "userName");
+        if (allContent.length < 1) {
+            const userInfo = yield db_1.userModel.findOne({
+                _id: req.body.id
+            });
+            res.status(200).json({
+                "data": userInfo
+            });
+            return;
+        }
         res.status(200).json({
             "data": allContent
         });

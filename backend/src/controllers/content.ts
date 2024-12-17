@@ -1,5 +1,5 @@
 import { Request,Response } from "express"
-import { contentModel, contentTypes } from "../db"
+import { contentModel, contentTypes, userModel } from "../db"
 import {z} from 'zod'
 
 // fetching all the content from the database
@@ -8,7 +8,17 @@ export const getContent = async(req:Request,res:Response)=>{
         const allContent = await contentModel.find({
             userId:req.body.id
         }).populate("userId","userName")
+        
+        if(allContent.length<1){
+            const userInfo = await userModel.findOne({
+                _id:req.body.id
+            },'userName')
 
+            res.status(200).json({
+                "data": userInfo
+            })
+            return;
+        }
         res.status(200).json({
             "data": allContent
         })
