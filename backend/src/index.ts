@@ -16,7 +16,7 @@ app.use(express.json())
 
 app.use(cors(
     {
-        origin:["https://brainly-nu.vercel.app/"],
+        origin:["https://brainly-nu.vercel.app"],
         methods:["POST","GET","DELETE"],
         credentials:true
     }
