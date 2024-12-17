@@ -72,7 +72,7 @@ export const SigninForm = () => {
 
             {errors.root && <p className='text-red-500 text-sm pl-4 w-64 '>{errors.root.message}</p>}   
         <div className='flex flex-col justify-center w-full mt-8 '>
-            <Button variants='primary' text='Signup' size='md' type='submit' fullWidth={true} loading={isSubmitting}></Button>    
+            <Button variants='primary' text='Login' size='md' type='submit' fullWidth={true} loading={isSubmitting}></Button>    
         </div>        
 </form>
 {
