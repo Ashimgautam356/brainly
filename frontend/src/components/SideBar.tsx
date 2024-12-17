@@ -70,8 +70,8 @@ export const SideBar = ({userName}:{userName:string}) => {
 
           <div className="p-8">
             <div className="mb-8">
+                  <p className="text-xs">Enter your friend share link!!</p>
               <div className="flex justify-between ">
-         
                   <input type="text"  className="w-32 p-1" placeholder="paste link here" required onChange={(e)=>{e.preventDefault(); setUserInput(e.target.value)}}/>
                   <button className="p-1 bg-purple-200 text-purple-600 font-semibold rounded-md cursor-pointer" onClick={onClickHandler}>Submit</button>
                 
