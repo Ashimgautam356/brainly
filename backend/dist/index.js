@@ -28,6 +28,7 @@ app.use(express_1.default.json());
 app.use((0, cors_1.default)({
     origin: "https://brainly-nu.vercel.app",
     methods: ["POST", "GET", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
 }));
 // Handle preflight requests
