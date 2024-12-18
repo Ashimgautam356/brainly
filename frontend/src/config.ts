@@ -1,3 +1,3 @@
 
 
-export const BACKEND_URL = "https://brainly-v55y.vercel.app/api/v1"
+export const BACKEND_URL = "https://brainly-qlex.vercel.app/api/v1"
