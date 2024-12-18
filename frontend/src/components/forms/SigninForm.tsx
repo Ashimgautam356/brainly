@@ -33,6 +33,10 @@ export const SigninForm = () => {
             const resp = await axios.post(`${BACKEND_URL}/signin`,{
                 email,
                 password
+        },{
+            headers:{
+                "Access-Control-Allow-Origin":"https://brainly-nu.vercel.app"
+            }
         })
         
             if(resp.status==200){
