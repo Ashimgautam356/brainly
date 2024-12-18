@@ -14,6 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userAuth = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const userAuth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const userToken = req.headers.token;
     if (!userToken) {
@@ -22,7 +24,7 @@ const userAuth = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
         });
         return;
     }
-    const isValidToken = jsonwebtoken_1.default.verify(String(userToken), "this is secrete");
+    const isValidToken = jsonwebtoken_1.default.verify(String(userToken), `${process.env.JWT_SECRET}`);
     if (!isValidToken) {
         res.status(404).json({
             "message": "invalid user"

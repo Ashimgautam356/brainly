@@ -17,6 +17,8 @@ const zod_1 = require("zod");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const db_1 = require("../db");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userLoginSchema = zod_1.z.object({
         email: zod_1.z.string().email({ message: "should be in a email format" }),
@@ -51,7 +53,7 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
     const token = jsonwebtoken_1.default.sign({
         id: String(user._id)
-    }, "this is secrete");
+    }, `${process.env.JWT_SECRET}`);
     res.status(200).json({
         "token": token
     });

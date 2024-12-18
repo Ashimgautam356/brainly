@@ -21,7 +21,7 @@ const getContent = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         if (allContent.length < 1) {
             const userInfo = yield db_1.userModel.findOne({
                 _id: req.body.id
-            });
+            }, 'userName');
             res.status(200).json({
                 "data": userInfo
             });

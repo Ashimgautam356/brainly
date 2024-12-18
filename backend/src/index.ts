@@ -6,11 +6,11 @@ import { userAuth } from './middleware/userAuth';
 import { contentRouter } from './routes/content';
 import { brainRouter } from './routes/brain';
 import  cors from 'cors';
-import dotenv from 'dotenv'
+import dotenv from "dotenv";
 
-dotenv.config()
 
 const app = express(); 
+dotenv.config({ path: './.env' });
 
 app.use(express.json())
 
@@ -35,12 +35,6 @@ app.options('*', (req, res) => {
 });
 
 
-
-mongoose.connect(`${process.env.MONGO_URL}`)
-    .then(() => console.log("Connected to MongoDB"))
-    .catch((error) => console.error("MongoDB connection error:", error));
-
-
 app.post('/api/v1/signup',signup)
 
 
@@ -54,11 +48,15 @@ app.use('/api/v1/brain',brainRouter)
 
 
 
-// async function main(){
-//     await mongoose.connect('mongodb+srv://ashim:ashim12345@taskmanagerproject.zdfcogy.mongodb.net/brainly')
-//     app.listen(3001,()=>{
-//         console.log("server is up!!!!!")
-//     })
-// }
 
-// main()
+
+async function main(){
+    
+    await mongoose.connect(String(process.env.MONGO_URL))
+    .then(() => console.log("Connected to MongoDB"))
+    .catch((error) => console.error("MongoDB connection error:", error));
+
+    app.listen()
+}
+
+main()
