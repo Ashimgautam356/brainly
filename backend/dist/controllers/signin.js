@@ -20,6 +20,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.body);
     const userLoginSchema = zod_1.z.object({
         email: zod_1.z.string().email({ message: "should be in a email format" }),
         password: zod_1.z.string().min(8, { message: "minimum length should be 8" }).max(20).regex(new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$'), {

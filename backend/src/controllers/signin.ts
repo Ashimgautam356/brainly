@@ -8,6 +8,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 export const signin = async(req:Request,res:Response)=>{
+    console.log(req.body)
     const userLoginSchema = z.object({
         email:z.string().email({message:"should be in a email format"}),
         password:z.string().min(8,{message:"minimum length should be 8"}).max(20).regex(new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$'), {
