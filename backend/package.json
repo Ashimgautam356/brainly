@@ -9,6 +9,9 @@
     "dev": "npm run build && npm start",
     "postinstall": "npm rebuild bcrypt"
   },
+  "engines": {
+  "node": "20.x"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
