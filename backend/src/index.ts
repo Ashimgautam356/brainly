@@ -28,7 +28,10 @@ app.use(cors({
 
 app.use(express.json())
 
-// // Handle preflight requests
+
+
+
+// Handle preflight requests
 // app.options('*', (req, res) => {
 //     res.header("Access-Control-Allow-Origin", "https://brainly-nu.vercel.app");
 //     res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
