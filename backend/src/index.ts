@@ -12,7 +12,6 @@ import dotenv from "dotenv";
 const app = express(); 
 dotenv.config({ path: './.env' });
 
-app.use(express.json())
 
 
 
@@ -22,12 +21,13 @@ app.use(express.json())
 
 
 app.use(cors({
-    origin: [`${process.env.FE_URL}`,'http://localhost:5173'],
+    origin: ['https://brainly-nu.vercel.app/','http://localhost:5173'],
     methods: ["POST", "GET", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization","token"],
     credentials: true
 }));
 
+app.use(express.json())
 
 // // Handle preflight requests
 // app.options('*', (req, res) => {
