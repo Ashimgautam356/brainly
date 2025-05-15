@@ -22,7 +22,6 @@ dotenv.config({ path: './.env' });
 
 app.use(cors({
     origin: ['https://brainly-nu.vercel.app/','http://localhost:5173'],
-    methods: ["POST", "GET", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization","token"],
     credentials: true
 }));
