@@ -14,6 +14,8 @@ type OutletContextType = {
 export const DashBoard = () => {
   const{setSharelink,setModalOpen}:OutletContextType = useOutletContext()
   const userContent = useContent()
+
+  console.log(userContent)
   
   return (
   <>

@@ -26,7 +26,7 @@ export function useContent():ResposeType[]{
     useEffect(()=>{
         axios.get(`${import.meta.env.VITE_API_URL}/content/allContent`, {
             headers: { token },
-          }).then((response)=> setContents(response.data.data))
+          }).then((response)=> {console.log(response); setContents(response.data.data)})
     },[])
     return contents
 }

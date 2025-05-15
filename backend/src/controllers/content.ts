@@ -15,7 +15,7 @@ export const getContent = async(req:Request,res:Response)=>{
             },'userName')
 
             res.status(200).json({
-                "data": userInfo
+                "data": [userInfo]
             })
             return;
         }

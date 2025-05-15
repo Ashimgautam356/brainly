@@ -26,12 +26,12 @@ dotenv_1.default.config({ path: './.env' });
 // CORS setup
 // app.use(cors())
 app.use((0, cors_1.default)({
-    origin: ['https://brainly-nu.vercel.app/', 'http://localhost:5173'],
+    origin: ['https://brainly-bnfp.onrender.com', 'http://localhost:5173'],
     allowedHeaders: ["Content-Type", "Authorization", "token"],
     credentials: true
 }));
 app.use(express_1.default.json());
-// // Handle preflight requests
+// Handle preflight requests
 // app.options('*', (req, res) => {
 //     res.header("Access-Control-Allow-Origin", "https://brainly-nu.vercel.app");
 //     res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
