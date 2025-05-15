@@ -30,7 +30,7 @@ export const SigninForm = () => {
         const password = data.password
 
         try{
-            const resp = await axios.post(BACKEND_URL+`/signin`,{
+            const resp = await axios.post(`${process.env.VITE_API_URL}/signin`,{
                 email:email,
                 password:password
         })
