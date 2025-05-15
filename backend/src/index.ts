@@ -18,13 +18,15 @@ app.use(express.json())
 
 
 // CORS setup
-app.use(cors())
-// app.use(cors({
-//     origin: ["https://brainly-nu.vercel.app",'http://localhost:5173'],
-//     methods: ["POST", "GET", "DELETE"],
-//     allowedHeaders: ["Content-Type", "Authorization","token"],
-//     credentials: true
-// }));
+// app.use(cors())
+
+
+app.use(cors({
+    origin: [`${process.env.FE_URL}`,'http://localhost:5173'],
+    methods: ["POST", "GET", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization","token"],
+    credentials: true
+}));
 
 
 // // Handle preflight requests
@@ -54,9 +56,8 @@ app.use('/api/v1/brain',brainRouter)
 
 async function main(){
 
-    console.log(process.env.MONGO_URL)
-    await mongoose.connect(String(process.env.MONGO_URL))
-    .then(() => console.log("Connected to MongoDB"))
+    await mongoose.connect(`${process.env.MONGO_URL}`)
+    .then((res) => console.log("Connected to MongoDB"))
     .catch((error) => console.error("MongoDB connection error:", error));
 
     app.listen(3000)

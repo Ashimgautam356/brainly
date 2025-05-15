@@ -25,13 +25,13 @@ const app = (0, express_1.default)();
 dotenv_1.default.config({ path: './.env' });
 app.use(express_1.default.json());
 // CORS setup
-app.use((0, cors_1.default)());
-// app.use(cors({
-//     origin: ["https://brainly-nu.vercel.app",'http://localhost:5173'],
-//     methods: ["POST", "GET", "DELETE"],
-//     allowedHeaders: ["Content-Type", "Authorization","token"],
-//     credentials: true
-// }));
+// app.use(cors())
+app.use((0, cors_1.default)({
+    origin: [`${process.env.FE_URL}`, 'http://localhost:5173'],
+    methods: ["POST", "GET", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization", "token"],
+    credentials: true
+}));
 // // Handle preflight requests
 // app.options('*', (req, res) => {
 //     res.header("Access-Control-Allow-Origin", "https://brainly-nu.vercel.app");
@@ -47,9 +47,8 @@ app.use('/api/v1/content', content_1.contentRouter);
 app.use('/api/v1/brain', brain_1.brainRouter);
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log(process.env.MONGO_URL);
-        yield mongoose_1.default.connect(String(process.env.MONGO_URL))
-            .then(() => console.log("Connected to MongoDB"))
+        yield mongoose_1.default.connect(`${process.env.MONGO_URL}`)
+            .then((res) => console.log("Connected to MongoDB"))
             .catch((error) => console.error("MongoDB connection error:", error));
         app.listen(3000);
     });
