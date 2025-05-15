@@ -6,7 +6,8 @@
   "scripts": {
     "build": "npx tsc -b",
     "start": "npm run build && node ./dist/index.js",
-    "dev": "npm run build && npm start"
+    "dev": "npm run build && npm start",
+    "postinstall": "npm rebuild bcrypt"
   },
   "keywords": [],
   "author": "",
