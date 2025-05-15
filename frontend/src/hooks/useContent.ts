@@ -24,7 +24,7 @@ export function useContent():ResposeType[]{
 
     const token = localStorage.getItem("token")
     useEffect(()=>{
-        axios.get(`${process.env.VITE_API_URL}/content/allContent`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/content/allContent`, {
             headers: { token },
           }).then((response)=> setContents(response.data.data))
     },[])

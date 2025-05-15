@@ -34,7 +34,7 @@ export const Card = ({title,link,type,date,id}:CardProps) => {
   
   const delteitem = async(id:string)=>{
     try{
-      const response = await axios.delete(`${process.env.VITE_API_URL}/content/delete/${id}`,{
+      const response = await axios.delete(`${import.meta.env.VITE_API_URL}/content/delete/${id}`,{
         headers:{token}
       })
 

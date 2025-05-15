@@ -11,7 +11,7 @@ export  function useLink(currentState:boolean){
         const fetchLink = async () => {
           try {
             const response = await axios.post(
-              `${process.env.VITE_API_URL}/brain/share`,
+              `${import.meta.env.VITE_API_URL}/brain/share`,
               { share: currentState },
               { headers: { token } }
             );

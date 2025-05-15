@@ -40,7 +40,7 @@ export const ContentForm = ({onClick}:{onClick: ()=>void}) => {
       const token = localStorage.getItem("token") as string
       const currentDate = new Date()
       try{
-        const response = await axios.post(`${process.env.VITE_API_URL}/content/postContent`,{
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/content/postContent`,{
           title,
           link,
           type,

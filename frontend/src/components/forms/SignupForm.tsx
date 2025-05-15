@@ -33,7 +33,7 @@ export const SignupForm = () => {
         const password = data.password
 
         try{
-            const resp = await axios.post(`${process.env.VITE_API_URL}/signup`,{
+            const resp = await axios.post(`${import.meta.env.VITE_API_URL}/signup`,{
                 userName,
                 email,
                 password
