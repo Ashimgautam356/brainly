@@ -28,9 +28,8 @@ export const SigninForm = () => {
     const onSubmit:SubmitHandler<FromFields>= async(data)=>{
         const email = data.email as unknown as string
         const password = data.password
-
         try{
-            const resp = await axios.post(`${process.env.VITE_API_URL}/signin`,{
+            const resp = await axios.post(`${import.meta.env.VITE_API_URL}/signin`,{
                 email:email,
                 password:password
         })
