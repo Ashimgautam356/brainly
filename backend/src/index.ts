@@ -21,7 +21,7 @@ dotenv.config({ path: './.env' });
 
 
 app.use(cors({
-    origin: ['https://brainly-bnfp.onrender.com/','http://localhost:5173'],
+    origin: ['https://brainly-bnfp.onrender.com','http://localhost:5173'],
     allowedHeaders: ["Content-Type", "Authorization","token"],
     credentials: true
 }));
