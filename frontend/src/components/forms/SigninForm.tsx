@@ -1,4 +1,4 @@
-import { BACKEND_URL } from '../../config'
+
 import {  useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { SubmitHandler, useForm } from 'react-hook-form'

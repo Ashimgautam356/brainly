@@ -3,7 +3,6 @@ import{z} from 'zod'
 import { Button } from '../Button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
-import { BACKEND_URL } from '../../config'
 import { useNavigate } from 'react-router-dom'
 import { Popup } from '../Popup'
  import React from 'react'
@@ -34,7 +33,7 @@ export const SignupForm = () => {
         const password = data.password
 
         try{
-            const resp = await axios.post(`${BACKEND_URL}/signup`,{
+            const resp = await axios.post(`${process.env.VITE_API_URL}/signup`,{
                 userName,
                 email,
                 password

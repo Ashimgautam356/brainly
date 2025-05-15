@@ -4,7 +4,6 @@ import {z} from 'zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
-import { BACKEND_URL } from '../../config'
 import { Popup } from '../Popup'
 import { useNavigate } from 'react-router-dom'
 
@@ -41,7 +40,7 @@ export const ContentForm = ({onClick}:{onClick: ()=>void}) => {
       const token = localStorage.getItem("token") as string
       const currentDate = new Date()
       try{
-        const response = await axios.post(`${BACKEND_URL}/content/postContent`,{
+        const response = await axios.post(`${process.env.VITE_API_URL}/content/postContent`,{
           title,
           link,
           type,

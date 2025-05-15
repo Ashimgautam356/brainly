@@ -1,5 +1,4 @@
 import axios from "axios";
-import { BACKEND_URL } from "../config";
 import { useEffect, useState } from "react";
 
 
@@ -9,7 +8,7 @@ export async function useBrain(prams:string){
     useEffect(()=>{
         const runFun  = async ()=>{
             try{
-                const response = await axios.get(`${BACKEND_URL}/brain/${prams}`,{headers:{token:token}})
+                const response = await axios.get(`${process.env.VITE_API_URL}/brain/${prams}`,{headers:{token:token}})
                 if(response.status ==200){
                     setResponseData(response.data)
                 }

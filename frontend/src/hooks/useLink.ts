@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { BACKEND_URL } from "../config"
 import axios from "axios"
 
 
@@ -12,7 +11,7 @@ export  function useLink(currentState:boolean){
         const fetchLink = async () => {
           try {
             const response = await axios.post(
-              `${BACKEND_URL}/brain/share`,
+              `${process.env.VITE_API_URL}/brain/share`,
               { share: currentState },
               { headers: { token } }
             );

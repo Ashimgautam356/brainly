@@ -4,7 +4,6 @@ import OtherIcon from "../icons/OtherIcon"
 import { ShareIcon } from "../icons/ShareIcon"
 import { TwitterIcon } from "../icons/TwitterIcon"
 import { YouttubeIcon } from "../icons/YouttubeIcon"
-import { BACKEND_URL } from "../config"
 import React from "react"
 import { Popup } from "./Popup"
 import { useNavigate } from 'react-router-dom'
@@ -35,7 +34,7 @@ export const Card = ({title,link,type,date,id}:CardProps) => {
   
   const delteitem = async(id:string)=>{
     try{
-      const response = await axios.delete(`${BACKEND_URL}/content/delete/${id}`,{
+      const response = await axios.delete(`${process.env.VITE_API_URL}/content/delete/${id}`,{
         headers:{token}
       })
 

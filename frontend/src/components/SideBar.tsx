@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom"
 import OtherIcon from "../icons/OtherIcon"
 import { useState } from "react"
 import axios from "axios"
-import { BACKEND_URL } from "../config"
+
 
 
 export const SideBar = ({userName}:{userName:string}) => {
@@ -21,7 +21,7 @@ export const SideBar = ({userName}:{userName:string}) => {
     if(userInput.length>1){
       try{
         console.log(userInput)
-        const response = await axios.get(`${BACKEND_URL}/brain/${userInput}`,{headers:{token:token}})
+        const response = await axios.get(`${process.env.VITE_API_URL}/brain/${userInput}`,{headers:{token:token}})
         
         if(response.status ==200){
           navigate(`brain/${userInput}`)
