@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { CrossIcon } from '../icons/CrossIcon'
-import { Button } from './Button'
 import { useLink } from '../hooks/useLink'
 
 interface LinkData{

@@ -1,9 +1,9 @@
 import { Button } from "../components/Button"
 import { ShareIcon } from "../icons/ShareIcon"
-import { useOutletContext, useParams } from "react-router-dom"
+import { useOutletContext} from "react-router-dom"
 import { Card } from "../components/Card"
 import { ResposeType } from "../hooks/useContent"
-import { useBrain } from "../hooks/useBrain"
+// import { useBrain } from "../hooks/useBrain"
 import { useState } from "react"
 
 
@@ -14,12 +14,12 @@ type OutletContextType = {
   };
 
 export const SharedBrain = () => {
-     const{setSharelink,setModalOpen}:OutletContextType = useOutletContext()
-    const [linkContent,setLinkContet] = useState({})
-     const {shareId} = useParams()
-    const contents = useBrain(String(shareId)).then(resp => setLinkContet(resp))
+     const{setSharelink}:OutletContextType = useOutletContext()
+    const [linkContent,setLinkContet] = useState<any>({})
+    //  const {shareId} = useParams()
+    // const contents = useBrain(String(shareId)).then(resp => setLinkContet(resp))
 
-     
+      setLinkContet("")
   return (
     <>
      <div className="flex flex-row justify-between items-center py-12">

@@ -1,4 +1,3 @@
-import React from 'react'
 import { IconProps, iconStyle } from '.'
 
 export const TickIcon = ({size}:IconProps) => {
